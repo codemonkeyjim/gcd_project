@@ -42,9 +42,9 @@ The variable `data.root.dir` in `run_analysis.R` should be set to the root direc
 
 Here's how the files are used:
 
-* `X_test.txt` and `X_train.txt` - These files contain the 10,299 total observations of the 561 variables. These variables are labeled according to the contents of `features.txt`.
-* `Y_test.txt` and `Y_train.txt` - These files contain the numeric label indicating the activity recorded in the corresponding X\_ files. They are converted to a factor based on the contents of `activity_labels.txt` and added as the `activity` column in the final dataset.
-* `subject_test.txt` and `subject_train.txt` - These files contain the number of the subject performing the activity recorded in the corresponding X\_ files. They are converted to a factor and added as the `subject` column in the final dataset.
+* `X_test.txt` and `X_train.txt` contain the 10,299 total observations of the 561 numeric variables. These variables are labeled according to the contents of `features.txt`. Both files are merged into `data.set`.
+* `Y_test.txt` and `Y_train.txt` contain the numeric label indicating the activity recorded in the corresponding X\_ files. The numeric labels are converted to a factor based on the contents of `activity_labels.txt` and added as the `activity` column in `data.set`.
+* `subject_test.txt` and `subject_train.txt` contain the number of the subject performing the activity recorded in the corresponding X\_ files. They are converted to a factor and added as the `subject` column in `data.set`.
 
 ---
 TODO Put instructions for loading the tidy data set here.
