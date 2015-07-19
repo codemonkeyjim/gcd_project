@@ -38,3 +38,12 @@ train.data <- cbind(activity = train.activities, subject = train.subjects, train
 # Merge test and train
 data.set <- rbind(test.data, train.data)
 data.set$subject <- factor(data.set$subject)
+
+# Determine names of columns to keep
+# Using '[.]' to match a literal period, since R complained about '\.'
+keep_cols = grep("[.](mean|std)[.]{2}([.][XYZ])?", names(data.set))
+
+# Keep the activity and subject columns too
+data.set <- data.set[,c(1, 2, keep_cols)]
+
+# Rename the columns as measurement(axis).function

@@ -46,6 +46,42 @@ Here's how the files are used:
 * `Y_test.txt` and `Y_train.txt` contain the numeric label indicating the activity recorded in the corresponding X\_ files. The numeric labels are converted to a factor based on the contents of `activity_labels.txt` and added as the `activity` column in `data.set`.
 * `subject_test.txt` and `subject_train.txt` contain the number of the subject performing the activity recorded in the corresponding X\_ files. They are converted to a factor and added as the `subject` column in `data.set`.
 
+## Extract mean and SD columns
+
+The dataset is then trimmed to only the mean and SD measurements of the following features:
+
+* tBodyAcc-XYZ
+* tGravityAcc-XYZ
+* tBodyAccJerk-XYZ
+* tBodyGyro-XYZ
+* tBodyGyroJerk-XYZ
+* tBodyAccMag
+* tGravityAccMag
+* tBodyAccJerkMag
+* tBodyGyroMag
+* tBodyGyroJerkMag
+* fBodyAcc-XYZ
+* fBodyAccJerk-XYZ
+* fBodyGyro-XYZ
+* fBodyAccMag
+* fBodyAccJerkMag
+* fBodyGyroMag
+* fBodyGyroJerkMag
+
+The following means were excluded because they did not have corresponding SDs:
+
+* gravityMean
+* tBodyAccMean
+* tBodyAccJerkMean
+* tBodyGyroMean
+* tBodyGyroJerkMean
+
+The names were then normalized as _measurement_._(axis)_._function_ where _measurement_ is the measurement name, _axis_ is X, Y, Z if the original measurement was along an axis, and _function_ is either _mean_ for the mean or _std_ for the SD. Examples:
+
+* tBodyAcc.X.mean
+* tBodyAcc.Y.std
+* tBodyAccMag.mean
+
 ---
 TODO Put instructions for loading the tidy data set here.
 ```
