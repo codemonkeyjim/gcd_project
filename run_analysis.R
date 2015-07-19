@@ -47,3 +47,4 @@ keep_cols = grep("[.](mean|std)[.]{2}([.][XYZ])?", names(data.set))
 data.set <- data.set[,c(1, 2, keep_cols)]
 
 # Rename the columns as measurement(axis).function
+names(data.set) <- sub('^([^.]+)[.]([^.]+)[.][.]([.][XYZ])?', '\\1\\3.\\2', names(data.set))
