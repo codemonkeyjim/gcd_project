@@ -82,16 +82,22 @@ The names were then normalized as _measurement_._(axis)_._function_ where _measu
 * tBodyAcc.Y.std
 * tBodyAccMag.mean
 
----
-TODO Put instructions for loading the tidy data set here.
+## Summarizing the data
+
+A separate data frome is created that has means of the 66 variables produced above, grouped by subject and activity (30 subjects x 6 activities = 180 rows). This data frame is in the "wide" tidy format described in *[(Wickham 2014)](http://www.jstatsoft.org/v59/i10)* and *[(Hood 2015)](https://class.coursera.org/getdata-030/forum/thread?thread_id=107)*. The data frame is written to `summary.txt` in the `data.root.dir`. A more complete description of this file can be found in the `CodeBook.md`. The online version can be read using the following code:
+
+TODO Link the CodeBook above
+
 ```
-address <- "https://s3.amazonaws.com/coursera-uploads/user-longmysteriouscode/asst-3/massivelongcode.csv"
+address <- "https://s3.amazonaws.com/coursera-uploads/user-e506a50fd744a4bbd0ccb5bd/975114/asst-3/be1b51d0321d11e59b6b4da2b2dc5cb0.txt"
 address <- sub("^https", "http", address)
-data <- read.table(url(address), header = TRUE) #if they used some other way of saving the file than a default write.table, this step will be different
-View(data)
+data <- read.table(url(address), header = TRUE)
+data$activity <- factor(data$activity)
+data$subject <- factor(data$subject)
 ```
----
 
 # References
+
+Hood, David. "[Tidy Data and the Assignment](https://class.coursera.org/getdata-030/forum/thread?thread_id=107)." *Getting and Cleaning Data*. Coursera, 7 July 2015. Web. 24 July 2015.
 
 Wickham, Hadley. "[Tidy Data](http://www.jstatsoft.org/v59/i10)." *The Journal of Statistical Software* 59.10 (2014): n. pag. Web. 14 July 2015.
