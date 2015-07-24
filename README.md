@@ -76,7 +76,7 @@ The following means were excluded because they did not have corresponding SDs:
 * tBodyGyroMean
 * tBodyGyroJerkMean
 
-The names were then normalized as _measurement_._(axis)_._function_ where _measurement_ is the measurement name, _axis_ is X, Y, Z if the original measurement was along an axis, and _function_ is either _mean_ for the mean or _std_ for the SD. Examples:
+The names were then normalized as _measurement_._(axis)_._function_ where _measurement_ is the measurement name, _axis_ is X, Y, or Z if the original measurement was along an axis, and _function_ is either _mean_ for the mean or _std_ for the SD. Examples:
 
 * tBodyAcc.X.mean
 * tBodyAcc.Y.std
@@ -84,13 +84,10 @@ The names were then normalized as _measurement_._(axis)_._function_ where _measu
 
 ## Summarizing the data
 
-A separate data frome is created that has means of the 66 variables produced above, grouped by subject and activity (30 subjects x 6 activities = 180 rows). This data frame is in the "wide" tidy format described in *[(Wickham 2014)](http://www.jstatsoft.org/v59/i10)* and *[(Hood 2015)](https://class.coursera.org/getdata-030/forum/thread?thread_id=107)*. The data frame is written to `summary.txt` in the `data.root.dir`. A more complete description of this file can be found in the `CodeBook.md`. The online version can be read using the following code:
-
-TODO Link the CodeBook above
+A separate data frame is created that has means of the 66 variables produced above, grouped by subject and activity (30 subjects x 6 activities = 180 rows). This data frame is in the "wide" tidy format described in *[(Wickham 2014)](http://www.jstatsoft.org/v59/i10)* and *[(Hood 2015)](https://class.coursera.org/getdata-030/forum/thread?thread_id=107)*. The data frame is written to `summary.txt` in the `data.root.dir`. A more complete description of this file can be found in the [Code Book](https://github.com/codemonkeyjim/gcd_project/blob/master/CodeBook.md). The online version of the data file can be read using the following code:
 
 ```
-address <- "https://s3.amazonaws.com/coursera-uploads/user-e506a50fd744a4bbd0ccb5bd/975114/asst-3/be1b51d0321d11e59b6b4da2b2dc5cb0.txt"
-address <- sub("^https", "http", address)
+address <- "http://s3.amazonaws.com/coursera-uploads/user-e506a50fd744a4bbd0ccb5bd/975114/asst-3/be1b51d0321d11e59b6b4da2b2dc5cb0.txt"
 data <- read.table(url(address), header = TRUE)
 data$activity <- factor(data$activity)
 data$subject <- factor(data$subject)
