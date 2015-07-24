@@ -12,76 +12,89 @@ mode        : selfcontained # {standalone, draft}
 - Each row is the means of all measurements for that subject and activity.
 - Refer to the [original dataset documentation](https://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones) for more details.
 
+## Identifying columns
+
 Column Name | Column Type | Description
 ------------|:-----------:|------------
 activity | character (factor) | Activity name. One of (WALKING, WALKING\_UPSTAIRS, WALKING\_DOWNSTAIRS, SITTING, STANDING, LAYING)
 subject | numeric (factor) | Subject ID number
 
-Column Name | Column Type | Aggregate | Component | Meas. type | Axis | Domain
-------------|:-----------:|:---------:|:---------:|:----------:|:----:|:------:
-tBodyAcc.X.mean | numeric | mean | body | linear acceleration | X | time
-tBodyAcc.Y.mean | numeric | mean | body | linear acceleration | Y | time
-tBodyAcc.Z.mean | numeric | mean | body | linear acceleration | Z | time
-tBodyAcc.X.std | numeric | SD | body | linear acceleration | X | time
-tBodyAcc.Y.std | numeric | SD | body | linear acceleration | Y | time
-tBodyAcc.Z.std | numeric | SD | body | linear acceleration | Z | time
-tGravityAcc.X.mean | numeric | mean | gravity | linear acceleration | X | time
-tGravityAcc.Y.mean | numeric | mean | gravity | linear acceleration | Y | time
-tGravityAcc.Z.mean | numeric | mean | gravity | linear acceleration | Z | time
-tGravityAcc.X.std | numeric | SD | gravity | linear acceleration | X | time
-tGravityAcc.Y.std | numeric | SD | gravity | linear acceleration | Y | time
-tGravityAcc.Z.std | numeric | SD | gravity | linear acceleration | Z | time
-tBodyAccJerk.X.mean | numeric | mean | body jerk | acceleration | X | time 
-tBodyAccJerk.Y.mean | numeric | mean | body jerk | acceleration | Y | time
-tBodyAccJerk.Z.mean | numeric | mean | body jerk | acceleration | Z | time
-tBodyAccJerk.X.std | numeric | SD | body jerk | acceleration | X | time
-tBodyAccJerk.Y.std | numeric | SD | body jerk | acceleration | Y | time
-tBodyAccJerk.Z.std | numeric | SD | body jerk | acceleration | Z | time
-tBodyGyro.X.mean | numeric | mean | body | angular velocity | X | time
-tBodyGyro.Y.mean | numeric | mean | body | angular velocity | Y | time
-tBodyGyro.Z.mean | numeric | mean | body | angular velocity | Z | time
-tBodyGyro.X.std | numeric | SD | body | angular velocity | X | time
-tBodyGyro.Y.std | numeric | SD | body | angular velocity | Y | time
-tBodyGyro.Z.std | numeric | SD | body | angular velocity | Z | time
-tBodyGyroJerk.X.mean | numeric | mean | body jerk | angular velocity | X | time
-tBodyGyroJerk.Y.mean | numeric | mean | body jerk | angular velocity | Y | time
-tBodyGyroJerk.Z.mean | numeric | mean | body jerk | angular velocity | Z | time
-tBodyGyroJerk.X.std | numeric | SD | body jerk | angular velocity | X | time
-tBodyGyroJerk.Y.std | numeric | SD | body jerk | angular velocity | X | time
-tBodyGyroJerk.Z.std | numeric | SD | body jerk | angular velocity | X | time
-tBodyAccMag.mean | numeric | mean of Euclidian norm | body | linear acceleration | N/A | time
-tBodyAccMag.std | numeric | SD of Euclidian norm | body | linear acceleration | N/A | time
-tGravityAccMag.mean | numeric | mean of Euclidian norm | gravity | linear acceleration | N/A | time
-tGravityAccMag.std | numeric | SD of Euclidian norm | gravity | linear acceleration | N/A | time
-tBodyAccJerkMag.mean | numeric | mean of Euclidian norm | body jerk | linear acceleration | N/A | time
-tBodyAccJerkMag.std | numeric | SD of Euclidian norm | body jerk | linear acceleration | N/A | time
-tBodyGyroMag.mean | numeric | mean of Euclidian norm | body | angular velocity | N/A | time 
-tBodyGyroMag.std | numeric | SD of Euclidian norm | body | angular velocity | N/A | time 
-tBodyGyroJerkMag.mean | numeric | mean of Euclidian norm | body jerk | angular velocity | N/A | time 
-tBodyGyroJerkMag.std | numeric | SD of Euclidian norm | body jerk | angular velocity | N/A | time 
-fBodyAcc.X.mean | numeric | mean | body | linear acceleration | X | frequency
-fBodyAcc.Y.mean | numeric | mean | body | linear acceleration | Y | frequency
-fBodyAcc.Z.mean | numeric | mean | body | linear acceleration | Z | frequency
-fBodyAcc.X.std | numeric | SD | body | linear acceleration | X | frequency
-fBodyAcc.Y.std | numeric | SD | body | linear acceleration | Y | frequency
-fBodyAcc.Z.std | numeric | SD | body | linear acceleration | Z | frequency
-fBodyAccJerk.X.mean | numeric | mean | body jerk | acceleration | X | frequency 
-fBodyAccJerk.Y.mean | numeric | mean | body jerk | acceleration | Y | frequency
-fBodyAccJerk.Z.mean | numeric | mean | body jerk | acceleration | Z | frequency
-fBodyAccJerk.X.std | numeric | SD | body jerk | acceleration | X | frequency
-fBodyAccJerk.Y.std | numeric | SD | body jerk | acceleration | Y | frequency
-fBodyAccJerk.Z.std | numeric | SD | body jerk | acceleration | Z | frequency
-fBodyGyro.X.mean | numeric | mean | body | angular velocity | X | frequency
-fBodyGyro.Y.mean | numeric | mean | body | angular velocity | Y | frequency
-fBodyGyro.Z.mean | numeric | mean | body | angular velocity | Z | frequency
-fBodyGyro.X.std | numeric | SD | body | angular velocity | X | frequency
-fBodyGyro.Y.std | numeric | SD | body | angular velocity | Y | frequency
-fBodyGyro.Z.std | numeric | SD | body | angular velocity | Z | frequency
-fBodyAccMag.mean | numeric | mean of Euclidian norm | body | linear acceleration | N/A | frequency
-fBodyAccMag.std | numeric | SD of Euclidian norm | body | linear acceleration | N/A | frequency
-fBodyBodyAccJerkMag.mean | numeric | mean of Euclidian norm | body jerk | linear acceleration | N/A | frequency
-fBodyBodyAccJerkMag.std | numeric | SD of Euclidian norm | body jerk | linear acceleration | N/A | frequency
-fBodyBodyGyroMag.mean | numeric | mean of Euclidian norm | body | angular velocity | N/A | frequency 
-fBodyBodyGyroMag.std | numeric | SD of Euclidian norm | body | angular velocity | N/A | frequency 
-fBodyBodyGyroJerkMag.mean | numeric | mean of Euclidian norm | body jerk | angular velocity | N/A | frequency 
-fBodyBodyGyroJerkMag.std | numeric | SD of Euclidian norm | body jerk | angular velocity | N/A | frequency 
+## Time-domain columns
+
+These columns are all numeric means of time-domain aggregates
+
+Column Name | Aggregate | Component | Meas. type | Axis
+------------|:---------:|:---------:|:----------:|:----:
+tBodyAcc.X.mean | mean | body | linear acceleration | X
+tBodyAcc.Y.mean | mean | body | linear acceleration | Y
+tBodyAcc.Z.mean | mean | body | linear acceleration | Z
+tBodyAcc.X.std | SD | body | linear acceleration | X
+tBodyAcc.Y.std | SD | body | linear acceleration | Y
+tBodyAcc.Z.std | SD | body | linear acceleration | Z
+tGravityAcc.X.mean | mean | gravity | linear acceleration | X
+tGravityAcc.Y.mean | mean | gravity | linear acceleration | Y
+tGravityAcc.Z.mean | mean | gravity | linear acceleration | Z
+tGravityAcc.X.std | SD | gravity | linear acceleration | X
+tGravityAcc.Y.std | SD | gravity | linear acceleration | Y
+tGravityAcc.Z.std | SD | gravity | linear acceleration | Z
+tBodyAccJerk.X.mean | mean | body jerk | acceleration | X 
+tBodyAccJerk.Y.mean | mean | body jerk | acceleration | Y
+tBodyAccJerk.Z.mean | mean | body jerk | acceleration | Z
+tBodyAccJerk.X.std | SD | body jerk | acceleration | X
+tBodyAccJerk.Y.std | SD | body jerk | acceleration | Y
+tBodyAccJerk.Z.std | SD | body jerk | acceleration | Z
+tBodyGyro.X.mean | mean | body | angular velocity | X
+tBodyGyro.Y.mean | mean | body | angular velocity | Y
+tBodyGyro.Z.mean | mean | body | angular velocity | Z
+tBodyGyro.X.std | SD | body | angular velocity | X
+tBodyGyro.Y.std | SD | body | angular velocity | Y
+tBodyGyro.Z.std | SD | body | angular velocity | Z
+tBodyGyroJerk.X.mean | mean | body jerk | angular velocity | X
+tBodyGyroJerk.Y.mean | mean | body jerk | angular velocity | Y
+tBodyGyroJerk.Z.mean | mean | body jerk | angular velocity | Z
+tBodyGyroJerk.X.std | SD | body jerk | angular velocity | X
+tBodyGyroJerk.Y.std | SD | body jerk | angular velocity | X
+tBodyGyroJerk.Z.std | SD | body jerk | angular velocity | X
+tBodyAccMag.mean | mean of Euclidian norm | body | linear acceleration | N/A
+tBodyAccMag.std | SD of Euclidian norm | body | linear acceleration | N/A
+tGravityAccMag.mean | mean of Euclidian norm | gravity | linear acceleration | N/A
+tGravityAccMag.std | SD of Euclidian norm | gravity | linear acceleration | N/A
+tBodyAccJerkMag.mean | mean of Euclidian norm | body jerk | linear acceleration | N/A
+tBodyAccJerkMag.std | SD of Euclidian norm | body jerk | linear acceleration | N/A
+tBodyGyroMag.mean | mean of Euclidian norm | body | angular velocity | N/A 
+tBodyGyroMag.std | SD of Euclidian norm | body | angular velocity | N/A 
+tBodyGyroJerkMag.mean | mean of Euclidian norm | body jerk | angular velocity | N/A 
+tBodyGyroJerkMag.std | SD of Euclidian norm | body jerk | angular velocity | N/A 
+
+## Frequency-domain columns
+
+These columns are all numeric means of frequency-domain aggregates
+
+Column Name | Aggregate | Component | Meas. type | Axis
+------------|:---------:|:---------:|:----------:|:----:
+fBodyAcc.X.mean | mean | body | linear acceleration | X
+fBodyAcc.Y.mean | mean | body | linear acceleration | Y
+fBodyAcc.Z.mean | mean | body | linear acceleration | Z
+fBodyAcc.X.std | SD | body | linear acceleration | X
+fBodyAcc.Y.std | SD | body | linear acceleration | Y
+fBodyAcc.Z.std | SD | body | linear acceleration | Z
+fBodyAccJerk.X.mean | mean | body jerk | acceleration | X 
+fBodyAccJerk.Y.mean | mean | body jerk | acceleration | Y
+fBodyAccJerk.Z.mean | mean | body jerk | acceleration | Z
+fBodyAccJerk.X.std | SD | body jerk | acceleration | X
+fBodyAccJerk.Y.std | SD | body jerk | acceleration | Y
+fBodyAccJerk.Z.std | SD | body jerk | acceleration | Z
+fBodyGyro.X.mean | mean | body | angular velocity | X
+fBodyGyro.Y.mean | mean | body | angular velocity | Y
+fBodyGyro.Z.mean | mean | body | angular velocity | Z
+fBodyGyro.X.std | SD | body | angular velocity | X
+fBodyGyro.Y.std | SD | body | angular velocity | Y
+fBodyGyro.Z.std | SD | body | angular velocity | Z
+fBodyAccMag.mean | mean of Euclidian norm | body | linear acceleration | N/A
+fBodyAccMag.std | SD of Euclidian norm | body | linear acceleration | N/A
+fBodyBodyAccJerkMag.mean | mean of Euclidian norm | body jerk | linear acceleration | N/A
+fBodyBodyAccJerkMag.std | SD of Euclidian norm | body jerk | linear acceleration | N/A
+fBodyBodyGyroMag.mean | mean of Euclidian norm | body | angular velocity | N/A 
+fBodyBodyGyroMag.std | SD of Euclidian norm | body | angular velocity | N/A 
+fBodyBodyGyroJerkMag.mean | mean of Euclidian norm | body jerk | angular velocity | N/A 
+fBodyBodyGyroJerkMag.std | SD of Euclidian norm | body jerk | angular velocity | N/A 
