@@ -6,6 +6,8 @@
 # 5. From the data set in step 4, create a second, independent tidy data set
 # with the average of each variable for each activity and each subject.
 
+library(dplyr)
+
 # Change this to the root directory of the dataset
 data.root.dir <- './UCI HAR Dataset/'
 
@@ -48,3 +50,13 @@ data.set <- data.set[,c(1, 2, keep_cols)]
 
 # Rename the columns as measurement(axis).function
 names(data.set) <- sub('^([^.]+)[.]([^.]+)[.][.]([.][XYZ])?', '\\1\\3.\\2', names(data.set))
+
+# Make a new DF of means of all the measurements
+# orig.names <- grep('^(activity|subject)', names(data.set), invert = TRUE, value = TRUE)
+# mean.names <- paste(orig.names, 'mean', sep = '.')
+
+# Summarize all the measurements without explicitly listing them
+summary.set <- data.set %>% group_by(activity, subject) %>% summarise_each(funs(mean))
+# names(summary.set) <- c('activity', 'subject', mean.names)
+
+write.table(summary.set, file = file.path(data.root.dir, 'summary.txt'), row.names = FALSE)
